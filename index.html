@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رمضان كريم</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap');
+
+body{
+    margin:0;
+    font-family:'Amiri',serif;
+    text-align:center;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:#fff;
+    overflow-x:hidden;
+}
+
+/* العنوان */
+#title{
+    font-size:38px;
+    margin-top:70px;
+    color:#ffd700;
+}
+
+/* القلب */
+#heart{
+    font-size:140px;
+    cursor:pointer;
+    margin:30px;
+    animation:bounce 2s infinite;
+    transition:0.3s;
+}
+#heart:hover{transform:scale(1.1);}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-15px)}
+}
+
+/* الرسالة */
+#message{
+    display:none;
+    background:#ffffffee;
+    color:#0f2027;
+    padding:25px;
+    border-radius:20px;
+    max-width:750px;
+    margin:20px auto;
+    line-height:1.9;
+    font-size:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.5);
+}
+
+/* اهتزاز */
+.shake{
+    animation:shake 0.4s;
+}
+@keyframes shake{
+    0%{transform:translateX(0)}
+    25%{transform:translateX(-6px)}
+    50%{transform:translateX(6px)}
+    75%{transform:translateX(-6px)}
+    100%{transform:translateX(0)}
+}
+
+/* ألعاب نارية */
+.firework{
+    position:fixed;
+    width:8px;
+    height:8px;
+    background:gold;
+    border-radius:50%;
+    animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+    from{opacity:1;transform:scale(1);}
+    to{opacity:0;transform:scale(15);}
+}
+
+audio{display:none;}
+
+</style>
+</head>
+
+<body>
+
+<h1 id="title"></h1>
+<div id="heart">❤️</div>
+<div id="message"></div>
+
+<audio id="myAudio" loop>
+<source src="ssstik.io_1771291323663.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* كتابة العنوان */
+const titleText="رمضان كريم يا رمرومتي كل سنة وانتي طيبة ❤️";
+let ti=0;
+const titleEl=document.getElementById("title");
+
+function typeTitle(){
+    if(ti<titleText.length){
+        titleEl.textContent+=titleText[ti];
+        ti++;
+        setTimeout(typeTitle,80);
+    }
+}
+typeTitle();
+
+/* الرسالة الكاملة */
+const fullMessage=`كل سنة وانتي طيبة يا أحلى وأغلى أخت في الدنيا 🤍
+رمضان كريم عليكي وعلينا يا رب، وربنا يجعله شهر مليان خير وبركة وسعادة وفرح ليكي دايماً 💛
+
+الموقع ده هدية بسيطة مني عشان أقولك قد إيه انتي غالية عليا،
+وقد إيه وجودك في حياتي نعمة كبيرة بحمد ربنا عليها كل يوم ✨
+انتي مش بس أختي… انتي صاحبتي وضهري وسندي وأقرب حد لقلبي 🤍
+
+يارب رمضان ده يكتبلك فيه كل الخير،
+ويحققلك كل أحلامك،
+ويفرح قلبك،
+ويبعد عنك أي زعل أو تعب،
+ويخلي ضحكتك دايماً منورة الدنيا حوالينا 💫
+
+وخلي بالك بقى من نفسك الأيام الجاية 😂🔥
+عشان الصواريخ هتفرقع فجأة ومن غير سابق إنذار،
+وأكياس المية في الطريق ومفيش هروب 💦😂
+فالبسي جاكيت واستعدي كويس 😎
+
+ومهما حصل،
+هنفضل دايماً إخوات وقلب واحد،
+وربنا يديمنا لبعض طول العمر 🤍🌙
+
+بحبك جداً جداً،
+وربنا يخليكي ليا وما يحرمنيش منك أبداً 🤍✨`;
+
+let mi=0;
+const msg=document.getElementById("message");
+
+function typeMessage(){
+    if(mi<fullMessage.length){
+        msg.textContent+=fullMessage[mi];
+        mi++;
+        setTimeout(typeMessage,35);
+    }
+}
+
+/* الضغط */
+document.getElementById("heart").addEventListener("click",function(){
+
+    document.body.classList.add("shake");
+    setTimeout(()=>document.body.classList.remove("shake"),400);
+
+    this.style.display="none";
+
+    document.getElementById("myAudio").play().catch(()=>{});
+
+    msg.style.display="block";
+    msg.textContent="";
+    mi=0;
+    typeMessage();
+
+    launchFireworks();
+});
+
+/* ألعاب نارية */
+function launchFireworks(){
+    for(let i=0;i<20;i++){
+        let fw=document.createElement("div");
+        fw.className="firework";
+        fw.style.left=Math.random()*window.innerWidth+"px";
+        fw.style.top=Math.random()*window.innerHeight+"px";
+        document.body.appendChild(fw);
+        setTimeout(()=>fw.remove(),1000);
+    }
+}
+
+</script>
+
+</body>
+</html>
